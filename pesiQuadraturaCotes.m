@@ -7,6 +7,9 @@ function c=pesiQuadraturaCotes(n)
 %   Output:
 %       c: pesi calcolati
 %
+if n<=0
+    error('n deve essere maggiore di zero');
+end
 c=(1:n+1);
 for i=0:n
     den=prod(i-[0:i-1 i+1:n]); % calcolo il denominatore
