@@ -18,6 +18,5 @@ for i=0:n
     a=[a./((n+1):-1:1) 0];
     num=polyval(a,n);
     
-    % Calcolo finale
     c(i+1)=num/den;
 end
