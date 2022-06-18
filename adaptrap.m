@@ -27,7 +27,7 @@ function [I2,nfeval] = adaptrap(f, a, b, tol, fa, fb)
         [I2a,nfevala] = adaptrap(f, a, x1, tol / 2, fa, f1);
         [I2b,nfevalb] = adaptrap(f, x1, b, tol / 2, f1, fb);
         I2=I2a+I2b;
-        nfeval=nfevala+nfevalb;
+        nfeval=nfeval+nfevala+nfevalb;
     end
 
     return
