@@ -24,7 +24,6 @@ function YQ = spline0(X, Y, XQ)
     m = tridia(ones(1, n - 1) .* 2, csi, phi, 6 .* df);
     mi = [0 m 0];
 
-    disp(hi)
     %for i=2:n-1
     %   ri(i-1)=Y(i-1)-(((hi(i).^2)./6).*(mi(i-1)));
     %  qi(i-1)=((Y(i)-Y(i-1))./(hi(i))) ...
