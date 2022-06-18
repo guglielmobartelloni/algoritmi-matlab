@@ -3,8 +3,8 @@ for n=1:9
         continue
     end
     Id=(1/3)*(exp(3)-1);
-    f = @(x) exp(3*x);
-    a=0;
+    f = ;
+    a=0;@(x) exp(3*x)
     b=1;
     h = (b-a)/n;
     x=a+(0:n)*h;
