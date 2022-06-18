@@ -1,6 +1,6 @@
 function [I2,nfeval] = adapsim(f, a, b, tol, fa, f1, fb)
     %
-    %Utilizzo: I2 = adapSimpson(f, a, b, tol)
+    % [I2,nfeval] = adapSimpson(f, a, b, tol)
     %
     %Input:
     %   f - function funzione integranda;
@@ -9,7 +9,7 @@ function [I2,nfeval] = adapsim(f, a, b, tol, fa, f1, fb)
     %
     % Output:
     %  I2 - approssimazione ottenuta.
-    %
+    %  nfeval - numero di valutazioni funzionali eseguite
     nfeval=0;
     x1 = (a + b) / 2;
 

@@ -1,6 +1,6 @@
 function [I2,nfeval] = adaptrap(f, a, b, tol, fa, fb)
     %
-    %Utilizzo: [I2,nfeval] = adaptrap(f, a, b, tol)
+    % [I2,nfeval] = adaptrap(f, a, b, tol)
     %
     %Input:
     %   f - function funzione integranda;
