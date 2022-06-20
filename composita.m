@@ -1,14 +1,39 @@
 function [If,err,nfeval] = composita( fun, a, b, n, tol)
 %
+%   [If,err,nfeval] = composita( fun, a, b, n, tol)
+%   Calcolo dell'integrale di una funzione attraverso l'uso della formula
+%   di Newton-Cotes di grado n fino ad arrivare alla tolleranza desiderata
+%   Input:
+%       fun - funzione integranda
+%       [a,b] - intervallo considerato
+%       n - grado della formula di Newton-Cotes
+%   Output:
+%       If - soluzione calcolata
+%       err - errore di quadratura commesso
+%       nfeval - numero di valutazioni funzionali fatte
 %
-%
-%
-%
-%
-%
-y=feval(fun, linspace(a,b,n+1));
-h=(b-a)/n;
-I1=h*(sum(y) - f(1)/2 - f(end)/2);
-I2= 2*h*(sum(y(1:2:end)) - f(1)/2 - f(end)/2);
-e = abs(I2-I1)/3;
+
+mi=mod(n,2);
+k=n;
+c=pesiQuadraturaCotes(k);
+h=(b-a)/k;
+x=linspace(a,b,k+1);
+y=feval(fun,x);
+nfeval=length(x);
+If=h*sum(y(1:k+1).*c(1:k+1));
+I2=0;
+err=tol+.1;
+while tol<err
+    k=k*2;
+    x=linspace(a,b,k+1);
+    y(1:2:k+1) = y(1:k/2+1);
+    y(2:2:k) = feval(fun,x(2:2:k));
+    nfeval=nfeval+length(x(2:2:k));
+    h=(b-a)/k;
+    for i = 1:n+1
+            I2 = I2 + h*sum(y(i:n:k))*c(i);
+    end
+    I2 = I2 + h*y(k+1)*c(n+1);
+    err = abs(I2 - If)/(2^(n+mi) -1);
+    If=I2;
 end
