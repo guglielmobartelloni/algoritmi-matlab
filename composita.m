@@ -12,7 +12,9 @@ function [If,err,nfeval] = composita( fun, a, b, n, tol)
 %       err - errore di quadratura commesso
 %       nfeval - numero di valutazioni funzionali fatte
 %
-
+if tol <0 || n<= 0 || a>b
+    error('Dati non corretti')
+end
 mi=mod(n,2);
 k=n;
 c=pesiQuadraturaCotes(k);
@@ -21,10 +23,11 @@ x=linspace(a,b,k+1);
 y=feval(fun,x);
 nfeval=length(x);
 If=h*sum(y(1:k+1).*c(1:k+1));
-I2=0;
-err=tol+.1;
-while tol<err
+err=tol;
+
+while tol<=err
     k=k*2;
+    I2=0;
     x=linspace(a,b,k+1);
     y(1:2:k+1) = y(1:k/2+1);
     y(2:2:k) = feval(fun,x(2:2:k));
