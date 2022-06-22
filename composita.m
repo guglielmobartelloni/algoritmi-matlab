@@ -15,7 +15,7 @@ function [If,err,nfeval] = composita( fun, a, b, n, tol)
 if tol <0 || n<= 0 || a>b
     error('Dati non corretti')
 end
-mi=mod(n,2);
+mi=2-mod(n,2);
 k=n;
 c=pesiQuadraturaCotes(k);
 h=(b-a)/k;

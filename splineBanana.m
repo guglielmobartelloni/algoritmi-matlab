@@ -25,7 +25,7 @@ function yq = splineBanana(x, y, xq)
     phi = zeros(n - 2, 1);
     phi(1:end) = h(2:n - 1) ./ (h(2:n - 1) + h(3:n));
     psi = zeros(n - 2, 1);
-    disp(phi)
+%     disp(phi)
     psi(1:end) = h(2:n - 1) ./ (h(1:n - 2) + h(2:n - 1));
     d = 2 * ones(n - 1, 1);
 
@@ -53,7 +53,6 @@ function yq = splineBanana(x, y, xq)
     for i = n - 1:-1:2
         m(i) = (m(i) - psi(i - 1) * m(i + 1)) / d(i - 1);
     end
-    disp(m)
     j = 1;
     for i = 2:n + 1
         j = 1;

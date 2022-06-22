@@ -20,16 +20,14 @@ function YQ = spline0(X, Y, XQ)
     phi = hi(2:n - 1) ./ (hi(2:n - 1) + hi(3:n));
     csi = hi(2:n - 1) ./ (hi(1:n - 2) + hi(2:n - 1));
     df = divdif(X, Y);
-
     m = tridia(ones(1, n - 1) .* 2, csi, phi, 6 .* df);
     mi = [0 m 0]';
-     disp(mi)
     YQ = zeros(size(XQ));
     j=1;
     for i=2:n+1
         hi = X(i) - X(i-1);
-        ri = Y(i-1) - (hi^2)/6 * mi(i-1);
         qi = (Y(i) - Y(i-1)) / hi - hi/6 * (mi(i) - mi(i-1));
+        ri = Y(i-1) - (hi^2)/6 * mi(i-1);
      fun = @(x)(((x-X(i-1))^3 *mi(i) + (X(i)-x)^3 * mi(i-1))/...
     (6 * hi) + qi * (x-X(i-1)) + ri);
     while XQ(j) < X(i)
