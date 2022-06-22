@@ -53,7 +53,7 @@ function yq = splineBanana(x, y, xq)
     for i = n - 1:-1:2
         m(i) = (m(i) - psi(i - 1) * m(i + 1)) / d(i - 1);
     end
-
+    disp(m)
     j = 1;
     for i = 2:n + 1
         j = 1;

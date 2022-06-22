@@ -1,4 +1,4 @@
-function x = mialdl(A, b)
+function [A,x] = mialdl(A, b)
     %
     %   x=miadl(A,b)
     % Calcola soluzione del sistema lieare Ax=b attraverso la fattorizzazione LDL^T
@@ -22,7 +22,6 @@ function x = mialdl(A, b)
         A(j + 1:n, j) = (A(j + 1:n, j) - A(j + 1:n, 1:j - 1) * v) / A(j, j);
     end
 
-    disp(A)
 
     % Calcolo della soluzione del sistema lineare
     controllo = length(b) == size(A, 1) && size(A, 1) == size(A, 2);

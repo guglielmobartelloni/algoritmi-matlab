@@ -36,18 +36,16 @@ function [A,x] = mialu(A, b)
         A(i + 1:n, i) = A(i + 1:n, i) / A(i, i);
         A(i + 1:n, i + 1:n) = A(i + 1:n, i + 1:n) - A(i + 1:n, i) * A(i, i + 1:n);
     end
-		% Risoluzione del sistema
+	% Risoluzione del sistema
+    b=b(p);
     n = length(b);
     x = b(:);
 
     for i = 2:n
-        x(i:n) = x(i:n) - A(i:n, i - 1) * x(i - 1);
+        x(i:n) = x(i:n)-A(i:n,i-1)*x(i-1);
     end
-
-    x = x ./ diag(A);
-
-    for i = n:-1:1
-        x(1:i - 1) = x(1:i - 1) - A(i, 1:i - 1)' * x(i);
+    for i=n:-1:1
+        x(i) = x(i)/A(i,i);
+        x(1:i-1) = x(1:i-1)-A(1:i-1,i)*x(i);
     end
-
     return
