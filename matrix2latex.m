@@ -11,7 +11,9 @@ s = sprintf('  \\begin{bmatrix}\n  ');
 % Add matrix content
 for k = 1:m
     for l = 1:n
-        s = sprintf('%s %6.3f', s, M(k, l)); % print 3 decimal places, align to 6 characters
+%         s = sprintf('%s %6.3f', s, M(k, l)); % print 3 decimal places, align to 6 characters
+        s = sprintf('%s %.15e', s, M(k, l)); % print 3 decimal places, align to 6 characters
+
         if l < n
             s = sprintf('%s &', s);
         end
