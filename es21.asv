@@ -1,0 +1,15 @@
+f = @(x) (1./(2*(2*(x.^2)-2*x+1)));
+f1 = @(x) (   (1-2.*x) / (( 2.*(x.^2) - 2.*x + 1 ).^2)  );
+n = 25;
+x= linspace(-2,3,n);
+xq = linspace(-2,3,10001);
+esatto = feval( f, xq );
+y0 = spline0(x, feval(f,x) , xq );
+ySpline = spline(linspace(-2, 3, n), feval(f,linspace(-2,3,n)) , linspace(-2,3,10001) );
+
+disp(max(abs(esatto - y0))); 
+disp(max(abs(esatto - ySpline)))
+% ySpline = max(abs(esatto - ySpline));
+% disp(ySpline)
+
+plot(xq,y0, 'r',xq,esatto,'b',xq,ySpline,'g')
