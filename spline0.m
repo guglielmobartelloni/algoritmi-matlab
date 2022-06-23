@@ -14,6 +14,9 @@ function YQ = spline0(X, Y, XQ)
     if length(X) ~= length(unique(X))
         error('Le ascisse devono essere distinte')
     end
+    % Ordinamento delle ascisse e delle ordinate
+    [X,indice]=sort(X); 
+    Y=Y(indice);
 
     n = length(X) - 1;
     hi(1:n) = X(2:n + 1) - X(1:n);
@@ -22,43 +25,40 @@ function YQ = spline0(X, Y, XQ)
     df = divdif(X, Y);
     m = tridia(ones(1, n - 1) .* 2, csi, phi, 6 .* df);
     mi = [0 m 0]';
+
     YQ = zeros(size(XQ));
-    j=1;
+    hi=ones(size(X));
+    qi=ones(size(X));
+    ri=ones(size(X));
     for i=2:n+1
-        hi = X(i) - X(i-1);
-        qi = (Y(i) - Y(i-1)) / hi - hi/6 * (mi(i) - mi(i-1));
-        ri = Y(i-1) - (hi^2)/6 * mi(i-1);
-     fun = @(x)(((x-X(i-1))^3 *mi(i) + (X(i)-x)^3 * mi(i-1))/...
-    (6 * hi) + qi * (x-X(i-1)) + ri);
-    while XQ(j) < X(i)
-    YQ(j) = feval(fun, XQ(j));
-    j = j+1;
+        hi(i) = X(i) - X(i-1);
+        qi(i) = (Y(i) - Y(i-1)) / hi(i) - hi(i)/6 * (mi(i) - mi(i-1));
+        ri(i) = Y(i-1) - (hi(i)^2)/6 * mi(i-1);
     end
+     j=1;
+     for i=2:n+1
+%     for i=1:length(XQ)
+%         k=findInterval(XQ(i),X);
+%         YQ(i)= (((XQ(i)+X(k-1))^3)*mi(k) + ((X(k)-XQ(i))^3)*mi(k-1))/(6*hi(k)) + qi(k)*(XQ(i)-X(k-1))+ri(k);
+        fun = @(x)(((x-X(i-1))^3 *mi(i) + (X(i)-x)^3 * mi(i-1))/...
+            (6 * hi(i))) + qi(i) * (x-X(i-1)) + ri(i);
+        while j <= length(XQ) && XQ(j) <= X(i)
+            YQ(j) = feval(fun, XQ(j));
+            j = j+1;
+        end
     end
-%     for i = 2:n + 1
-%         j = 1;
-% 
-%         for i = 2:n + 1
-% 
-%             if XQ(j) <= X(i)
-%                 ri = Y(i - 1) - (hi(i - 1)^2/6) * mi(i - 1);
-%                 qi = ((Y(i) - Y(i - 1)) / hi(i - 1)) - ...
-%                     ((hi(i - 1) / 6) * (mi(i) - mi(i - 1)));
-%                 y = @(x) ((((x - X(i - 1))^3) * mi(i) + ((X(i) - x)^3) * mi(i - 1)) / ...
-%                     (6 * hi(i - 1))) + qi * (x - X(i - 1)) + ri;
-% 
-%                 while j <= length(XQ) && XQ(j) <= X(i)
-%                     YQ(j) = feval(y, XQ(j));
-%                     j = j + 1;
-%                 end
-% 
-%             end
+    
 
-%         end
+end
 
-%         YQ = YQ(:);
-%     end
-
+function k=findInterval(xq,X)
+    k=1;
+    while xq > X(k) && k < length(X) 
+        k=k+1;
+    end
+    if k==1
+        k=k+1;
+    end
 end
 
 function ddf = divdif(x, f)

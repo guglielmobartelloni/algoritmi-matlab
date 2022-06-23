@@ -54,6 +54,7 @@ function yq = splineBanana(x, y, xq)
         m(i) = (m(i) - psi(i - 1) * m(i + 1)) / d(i - 1);
     end
     j = 1;
+    disp(m)
     for i = 2:n + 1
         j = 1;
 
@@ -65,8 +66,8 @@ function yq = splineBanana(x, y, xq)
                     ((h(i - 1) / 6) * (m(i) - m(i - 1)));
                 fun = @(k) ((((k - x(i - 1))^3) * m(i) + ((x(i) - k)^3) * m(i - 1)) / ...
                     (6 * h(i - 1))) + qi * (k - x(i - 1)) + ri;
-
-                while j <= length(xq) && xq(j) <= x(i)
+               
+                while 
                     yq(j) = feval(fun, xq(j));
                     j = j + 1;
                 end
