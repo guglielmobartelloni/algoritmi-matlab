@@ -1,10 +1,13 @@
 function [x, nr] = miaqr(A, b)
-%
-%
-%
-%
-%
-%
+%   [x, nr] = miaqr(A, b)
+% Calcola la soluzione del sistema lineare sovradeterminato Ax=b nel senso
+% dei minimi quadrati
+%   Input:
+%       A - Matrice mxn dove m>n
+%       b - vettore dei termini noti
+%   Output:
+%       x - soluzione calcolata
+%       nr - norma del vettore residuo
 %
     [m, n] = size(A);
     for i = 1:n
