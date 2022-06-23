@@ -1,6 +1,12 @@
 function [x, nr] = miaqr(A, b)
+%
+%
+%
+%
+%
+%
+%
     [m, n] = size(A);
-
     for i = 1:n
         alfa = norm(A(i:m, i));
         if alfa == 0, error('La matrice A non ha rango massimo'), end
@@ -23,3 +29,4 @@ function [x, nr] = miaqr(A, b)
         x(i) = x(i) / A(i, i);
         x(1:i - 1) = x(1:i - 1) - A(1:i - 1, i) * x(i);
     end
+    nr = norm(b(n+1:m));
