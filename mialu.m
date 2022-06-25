@@ -1,4 +1,4 @@
-function [A,x] = mialu(A, b)
+function x = mialu(A, b)
     %
     %   x=mialu(A,b)
     % Calcola soluzione del sistema lieare Ax=b attraverso la fattorizzazione
