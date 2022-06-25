@@ -37,10 +37,7 @@ function YQ = spline0(X, Y, XQ)
     end
      j=1;
      for i=2:n+1
-%     for i=1:length(XQ)
-%         k=findInterval(XQ(i),X);
-%         YQ(i)= (((XQ(i)+X(k-1))^3)*mi(k) + ((X(k)-XQ(i))^3)*mi(k-1))/(6*hi(k)) + qi(k)*(XQ(i)-X(k-1))+ri(k);
-        fun = @(x)(((x-X(i-1))^3 *mi(i) + (X(i)-x)^3 * mi(i-1))/...
+       fun = @(x)(((x-X(i-1))^3 *mi(i) + (X(i)-x)^3 * mi(i-1))/...
             (6 * hi(i))) + qi(i) * (x-X(i-1)) + ri(i);
         while j <= length(XQ) && XQ(j) <= X(i)
             YQ(j) = feval(fun, XQ(j));

@@ -1,4 +1,4 @@
-function y = NewtonInt(X, Y, XQ)
+function y = newton(X, Y, XQ)
     %
     %   xy = newton(X,Y,XQ);
     %   Calcolo del polinomio interpolante nella forma di Newton
