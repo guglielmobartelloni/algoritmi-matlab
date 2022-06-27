@@ -1,16 +1,16 @@
 function y = newton(X, Y, XQ)
     %
-    %   xy = newton(X,Y,XQ);
+    %   y = newton(X,Y,XQ);
     %   Calcolo del polinomio interpolante nella forma di Newton
     %   Input:
-    %   (X,Y): dati del problema
-    %   XQ: vettore in cui calcolare il polinomio
+    %   (X,Y) - dati del problema
+    %   XQ - vettore in cui calcolare il polinomio
     %
     if length(X) ~= length(Y)
         error('Errere nei dati del problema');
     end
 
-    if length(X) == length(unique(X))
+    if length(X) ~= length(unique(X))
         error('Le ascisse devono essere distinte')
     end
 

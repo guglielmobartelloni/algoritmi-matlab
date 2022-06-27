@@ -1,6 +1,6 @@
 function [x,nit] = newton(fun,jacobian,x0,tol,maxit)
 %
-%   [x,nit] = newtonNonLinear(fun,jacobian,x0,tol,maxit)
+%   [x,nit] = newton(fun,jacobian,x0,tol,maxit)
 %   Calcola la soluzione del sistema non lineare attraverso il metodo di
 %   Newton
 %   Input:
